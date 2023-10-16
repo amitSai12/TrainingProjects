@@ -1,0 +1,76 @@
+<%@page import="com.java.library.Books"%>
+<%@page import="java.util.List"%>
+<%@page import="org.apache.tomcat.jni.Library"%>
+<%@page import="com.java.library.LibraryDAOImpl"%>
+<%@page import="com.java.library.LibraryDAO"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Book Search Results</title>
+    <link rel="stylesheet" href="AllBooks.css">
+</head>
+<body>
+    <jsp:include page="Menu.jsp"/>
+   
+    <%
+        LibraryDAO dao = new LibraryDAOImpl();
+        String searchType = request.getParameter("searchtype");
+        String searchValue = request.getParameter("searchvalue");
+        List<Books> bookList = dao.searchBooks(searchType, searchValue);
+    %>
+    <br><br> List Size: <%= bookList.size() %>
+    
+    
+    <br><br><form method="get" action="issue.jsp">
+    <h2>Book Search Results :</h2>
+    <center>
+    <table border="1">
+        <tr>
+            <th>Book Id</th>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Edition</th>
+            <th>Department</th>
+            <th>Total Books</th>
+            <th>Issue Status</th>
+        </tr>
+    </center>
+    <%
+        for(Books book : bookList){
+    %>
+    <tr>
+        <td><%=book.getId() %></td>
+        <td><%=book.getName() %></td>
+        <td><%=book.getAuthor() %></td>
+        <td><%=book.getEdition() %></td>
+        <td><%=book.getDept() %></td>
+        <td><%=book.getNoOfBooks() %></td>
+          
+           <%if(book.getNoOfBooks()!=0){ %>
+				<td><input type="checkbox"id="check1" name="check1"
+				 value="<%=book.getId()%>">
+				</td>
+				<%
+				} else{
+				%>
+				<td>NA</td>
+				<%
+				}
+				%>
+			</tr>
+	<%
+        }
+    %>
+    </table>
+    <br><br>
+    <input type="submit" value="IssueBook" id="issue" /><br><br>
+    </form>
+    </center>
+</body>
+</html>

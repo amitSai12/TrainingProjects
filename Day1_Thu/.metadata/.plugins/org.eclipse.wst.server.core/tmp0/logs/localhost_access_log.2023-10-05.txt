@@ -1,0 +1,11 @@
+127.0.0.1 - - [05/Oct/2023:22:29:17 +0530] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [05/Oct/2023:22:29:18 +0530] "GET /LibraryManagementDemo/Login.jsp HTTP/1.1" 200 511
+0:0:0:0:0:0:0:1 - - [05/Oct/2023:22:29:18 +0530] "GET /LibraryManagementDemo/login.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [05/Oct/2023:22:29:44 +0530] "POST /LibraryManagementDemo/Login.jsp HTTP/1.1" 200 1046
+0:0:0:0:0:0:0:1 - - [05/Oct/2023:22:29:45 +0530] "GET /LibraryManagementDemo/menu2.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [05/Oct/2023:22:29:45 +0530] "GET /LibraryManagementDemo/kisspng-book-clip-art-vector-books-5aa7e41834c997.8769820715209523442162.png HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [05/Oct/2023:22:29:57 +0530] "POST /LibraryManagementDemo/Login.jsp HTTP/1.1" 200 1046
+0:0:0:0:0:0:0:1 - - [05/Oct/2023:22:30:03 +0530] "GET /LibraryManagementDemo/Search.jsp HTTP/1.1" 200 2004
+0:0:0:0:0:0:0:1 - - [05/Oct/2023:22:30:03 +0530] "GET /LibraryManagementDemo/AllBooks.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [05/Oct/2023:22:30:03 +0530] "GET /LibraryManagementDemo/menu.css HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [05/Oct/2023:22:30:08 +0530] "GET /LibraryManagementDemo/AllBooks.jsp?searchvalue=&searchtype=all HTTP/1.1" 200 5499

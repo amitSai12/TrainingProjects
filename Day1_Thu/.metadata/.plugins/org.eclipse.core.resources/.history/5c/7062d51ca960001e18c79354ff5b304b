@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>User Account Page</title>
+<link rel="stylesheet" href="menu2.css">
+</head>
+<body>
+
+			
+	<div class="logo">
+		<img
+			src="kisspng-book-clip-art-vector-books-5aa7e41834c997.8769820715209523442162.png"
+			alt="Your Logo"> <span class="logo-text">LibraryManagement</span>
+	
+	<div class="menu">
+		<div class="atwo">
+			<a href="AccountDetails.jsp">Account Details</a>
+		</div>
+		<div class="atwo">
+			<a href="Search.jsp">Search / Issue</a>
+		</div>
+		<div class="atwo">
+			<a href="TranBook.jsp">Return</a>
+		</div>
+		<div class="atwo">
+			<a href="History.jsp">History</a>
+		</div>
+	</div>
+	</div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Typing Transition</title>
+</head>
+<body>
+  <div class="typing-text-container">
+    <p class="typing-text">
+    Welcome to Your Library <br>
+    The most awaited platform to get your books 
+    
+     </p>
+  </div>
+</body>
+</html>
+
+
+
+</body>
+</html>

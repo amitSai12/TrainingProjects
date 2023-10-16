@@ -1,0 +1,250 @@
+package com.java.library;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.mysql.cj.xdevapi.Result;
+
+public class LibraryDAOImpl implements LibraryDAO {
+
+	Connection connection;
+	PreparedStatement pst;
+	@Override
+	public String createUser(LibUsers libUsers) throws ClassNotFoundException, SQLException {
+		connection = ConnectionHelper.getConnection();
+		String enPwd = EncryptPassword.getCode(libUsers.getPassword());
+		String cmd = "Insert into LibUsers(Username,Password) values(?,?)";
+		pst = connection.prepareStatement(cmd);
+		pst.setString(1, libUsers.getUserName());
+		pst.setString(2, enPwd);
+		pst.executeUpdate();
+		return "Your Account Created ...";
+	}
+	@Override
+	public int authenticate(LibUsers libUsers) throws ClassNotFoundException, SQLException {
+		connection = ConnectionHelper.getConnection();
+		String encr = EncryptPassword.getCode(libUsers.getPassword());
+		String cmd = "select count(*) cnt from LibUsers where userName=? AND Password=?";
+		pst = connection.prepareStatement(cmd);
+		pst.setString(1, libUsers.getUserName());
+		pst.setString(2, encr.trim());
+		ResultSet rs = pst.executeQuery();
+		rs.next();
+		int count = rs.getInt("cnt");
+		return count;
+		
+		
+	}
+	@Override
+	public List<Books> searchBooks(String searchType, String searchValue) throws ClassNotFoundException, SQLException {
+		String sql;
+		boolean isValid=true;
+		if(searchType.equals("id")) {
+			sql="SELECT * from Books where Id=?";
+		}else if(searchType.equals("bookname")) {
+			sql="SELECT * from Books where name=?";
+		}else if(searchType.equals("authorname")) {
+			sql="SELECT * from Books where author=?";
+		}else if(searchType.equals("dept")) {
+			sql="SELECT * from Books where dept=?";
+		}else {
+			isValid=false;
+			sql="SELECT * from Books";
+		}
+			connection = ConnectionHelper.getConnection();
+			pst = connection.prepareStatement(sql);
+			if (isValid==true) {
+				pst.setString(1, searchValue);
+			} 
+			ResultSet rs = pst.executeQuery();
+			Books books = null;
+			List<Books> booksList = new ArrayList<Books>();
+			while(rs.next()) {
+				books = new Books();
+				books.setId(rs.getInt("id"));
+				books.setName(rs.getString("name"));
+				books.setAuthor(rs.getString("author"));
+				books.setEdition(rs.getString("edition"));
+				books.setDept(rs.getString("dept"));
+				books.setNoOfBooks(rs.getInt("TotalBooks"));
+				booksList.add(books);
+			
+		}
+		return booksList;
+	}
+	@Override
+	public String updateBooks(int bookId,String user) throws ClassNotFoundException, SQLException {
+			connection = ConnectionHelper.getConnection();
+			Books book = getBookById(bookId);
+			
+			 if (hasUserIssuedBook(bookId, user)) {
+			        return "You have already issued this book.";
+			    }else {
+			
+			    String cmd = "UPDATE Books SET TotalBooks = TotalBooks - 1 WHERE Id = ?";
+			    pst = connection.prepareStatement(cmd);
+			    pst.setInt(1, bookId);
+			    pst.executeUpdate();
+			    cmd = "Insert into TranBook(bookId,userName) values(?,?)";
+			    pst = connection.prepareStatement(cmd);
+			    pst.setInt(1, bookId);
+			    pst.setString(2, user);
+			    pst.executeUpdate();
+			    return "Book Issued Successfully";
+		    }
+	}
+	
+	  @Override
+	    public Books getBookById(int Id) throws ClassNotFoundException, SQLException {
+	        Connection connection = ConnectionHelper.getConnection();
+	        PreparedStatement preparedStatement = null;
+	        ResultSet resultSet = null;
+	        Books book = null;
+
+	        try {
+	            String query = "SELECT * FROM Books WHERE Id = ?";
+	            preparedStatement = connection.prepareStatement(query);
+	            preparedStatement.setInt(1, Id);
+	            resultSet = preparedStatement.executeQuery();
+
+	            if (resultSet.next()) {
+	                // Retrieve book details from the result set
+	                int id = resultSet.getInt("Id");
+	                String name = resultSet.getString("Name");
+	                String author = resultSet.getString("Author");
+	                String edition = resultSet.getString("Edition");
+	                String dept = resultSet.getString("Dept");
+	                int noOfBooks = resultSet.getInt("TotalBooks");
+	                // Retrieve other book details...
+
+	                // Create a Books object with retrieved details
+	                book = new Books(id, name, author, edition, dept,noOfBooks);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            // Handle any exceptions or log errors
+	        } finally {
+	            // Close database resources (connection, statement, and result set)
+	            // Handle resource closing exceptions if necessary
+	        }
+
+	        return book;
+	    }
+	  
+	  @Override
+		public Books getBookByUser(String User) throws ClassNotFoundException, SQLException {
+		  Connection connection = ConnectionHelper.getConnection();
+	        PreparedStatement preparedStatement = null;
+	        ResultSet resultSet = null;
+	        Books book = null;
+
+	        try {
+	            String query = "SELECT * FROM Books WHERE UserName = ?";
+	            preparedStatement = connection.prepareStatement(query);
+	            preparedStatement.setInt(1, UserName);
+	            resultSet = preparedStatement.executeQuery();
+
+	            if (resultSet.next()) {
+	                // Retrieve book details from the result set
+	                int id = resultSet.getInt("Id");
+	                String name = resultSet.getString("Name");
+	                String author = resultSet.getString("Author");
+	                String edition = resultSet.getString("Edition");
+	                String dept = resultSet.getString("Dept");
+	                int noOfBooks = resultSet.getInt("TotalBooks");
+	                // Retrieve other book details...
+
+	                // Create a Books object with retrieved details
+	                book = new Books(id, name, author, edition, dept,noOfBooks);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            // Handle any exceptions or log errors
+	        } finally {
+	            // Close database resources (connection, statement, and result set)
+	            // Handle resource closing exceptions if necessary
+	        }
+
+	        return book;
+		}
+	  
+	  private boolean hasUserIssuedBook(int bookId, String user) throws SQLException {
+		    // Check if the user has already issued the same book
+		    String query = "SELECT COUNT(*) FROM TranBook WHERE bookId = ? AND userName = ?";
+		    PreparedStatement preparedStatement = null;
+		    ResultSet resultSet = null;
+
+		    try {
+		        preparedStatement = connection.prepareStatement(query);
+		        preparedStatement.setInt(1, bookId);
+		        preparedStatement.setString(2, user);
+		        resultSet = preparedStatement.executeQuery();
+
+		        if (resultSet.next()) {
+		            int count = resultSet.getInt(1);
+		            return count > 0;
+		        }
+		    } finally {
+		        // Close resources
+		        if (resultSet != null) {
+		            resultSet.close();
+		        }
+		        if (preparedStatement != null) {
+		            preparedStatement.close();
+		        }
+		    }
+
+		    return false;
+		}
+	  
+	@Override
+	public String returnBooks(int bookId, String user) throws ClassNotFoundException, SQLException {
+		connection = ConnectionHelper.getConnection();
+		Books book = getBookById(bookId);
+		
+		    String cmd = "UPDATE Books SET TotalBooks = TotalBooks + 1 WHERE Id = ?";
+		    pst = connection.prepareStatement(cmd);
+		    pst.setInt(1, bookId);
+		    pst.executeUpdate();
+		    
+		    cmd = "Insert into Transreturn(bookId,userName) values(?,?)";
+		    pst = connection.prepareStatement(cmd);
+		    pst.setInt(1, bookId);
+		    pst.setString(2, user);
+		    pst.executeUpdate();
+		    
+		    cmd = "Delete from TranBook where (bookId,userName) values(?,?)";
+		    pst = connection.prepareStatement(cmd);
+		    pst.setInt(1, bookId);
+		    pst.setString(2, user);
+		    pst.executeUpdate();
+		    
+		   
+		    
+		    return "Book Returned Successfully...";
+	}
+	@Override
+	public List<Books> returnBook() throws ClassNotFoundException, SQLException {
+		connection = ConnectionHelper.getConnection();
+		String sql="SELECT * from tranbook";
+		pst = connection.prepareStatement(sql);
+		ResultSet rs = pst.executeQuery();
+		Books books = null;
+		List<Books> returnbooksList = new ArrayList<Books>();
+		while(rs.next()) {
+			books = new Books();
+			books.setId(rs.getInt("bookid"));
+			books.setName(rs.getString("Username"));
+			books.setFromDate(rs.getDate("fromDate"));
+			returnbooksList.add(books);
+		
+	}
+		return returnbooksList;
+	}
+	
+	
+}

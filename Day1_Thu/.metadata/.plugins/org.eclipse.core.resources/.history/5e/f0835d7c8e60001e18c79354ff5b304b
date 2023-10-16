@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: radial-gradient(circle, #6bd18e, #70d58f, #75da90, #7ade90, #7fe291, #80e58e, #82e98b, #84ec88, #84f07f, #84f476, #86f76b, #88fb5f);
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    color: white;
+    margin-bottom: 20px; /* Adjust margin to create space below the logo */
+}
+
+/* Style the logo image */
+.logo img {
+    width: 40px; /* Adjust the width as needed */
+    height: 40px; /* Adjust the height as needed */
+    margin-right: 10px; /* Add some spacing between the image and text */
+}
+
+/* Style the logo text */
+.logo-text {
+    font-size: 14px; /* Adjust the font size as needed */
+    font-weight: bold; /* Make the text bold */
+}
+
+.menu {
+	 position: fixed;
+    display: flex;
+    justify-content: flex-end; /* Move menu to the right top corner */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border-radius: 31px;
+    margin-left: 360px;
+}
+
+.menu a {
+    text-decoration: none; /* Remove the default underline */
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    position: relative; /* Add relative positioning */
+    transition: color 0.3s;/* Add transitions for color and background-color */
+    font-size: 14px;
+}
+
+.menu a-text {
+    font-size: 6px; /* Adjust the font size as needed */
+    font-weight: bold;
+}
+
+.menu a::before {
+    content: ""; /* Create an empty pseudo-element */
+    position: absolute; /* Set absolute positioning */
+    bottom: 0; /* Position it at the bottom */
+    left: 10%; /* Align it with the left edge of the link */
+    width: 0%; /* Initially, the width is 0% */
+    height: 2px; /* Set the height of the underline */
+    background-color: white; /* Color of the underline */
+    transition: width 0.3s ease; /* Add a transition for width */
+}
+
+.menu a:hover {
+    color: white; /* Change text color on hover */
+   
+}
+
+.menu a:hover::before {
+    width: 80%; /* Expand the width of the underline on hover */
+}
+
+
+
+/* Rest of your CSS styles */
+/* ... */
+
+/* Style the Issue and Return buttons */
+input#issue,
+input#return {
+    background: linear-gradient(to bottom, rgb(0, 0, 128), rgb(0, 0, 255));
+    width: 20%;
+    border-radius: 29px;
+    color: white;
+    height: 40px;
+    border: 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+input#issue:hover,
+input#return:hover {
+    background: linear-gradient(to bottom, rgb(0, 128, 255), rgb(0, 255, 255));
+}

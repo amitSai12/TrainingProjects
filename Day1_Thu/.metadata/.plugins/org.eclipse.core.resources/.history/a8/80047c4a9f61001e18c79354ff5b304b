@@ -1,0 +1,202 @@
+body {
+    font-family: Arial, sans-serif;
+	background-image: linear-gradient(to right, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+	margin: 0;
+    padding: 0;
+}
+
+   
+ Add a class to control the overlay opacity */
+body.loaded::before {
+    opacity: 0; /* Fully transparent to reveal the background */
+}
+.logo {
+	
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    color: white;
+    margin-bottom: 20px; /* Adjust margin to create space below the logo */
+   
+}
+
+/* Style the logo image */
+.logo img {
+    width: 40px; /* Adjust the width as needed */
+    height: 40px; /* Adjust the height as needed */
+    margin-right: 10px; /* Add some spacing between the image and text */
+}
+
+/* Style the logo text */
+.logo-text {
+    font-size: 14px; /* Adjust the font size as needed */
+    font-weight: bold; /* Make the text bold */
+}
+
+.menu {
+	 position: fixed;
+    display: flex;
+    justify-content: flex-end; /* Move menu to the right top corner */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border-radius: 31px;
+   margin-left: 565px;
+}
+
+.menu a {
+    text-decoration: none; /* Remove the default underline */
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    position: relative; /* Add relative positioning */
+    transition: color 0.3s;/* Add transitions for color and background-color */
+    font-size: 14px;
+}
+
+.menu a-text {
+    font-size: 6px; /* Adjust the font size as needed */
+    font-weight: bold;
+}
+
+.menu a::before {
+    content: ""; /* Create an empty pseudo-element */
+    position: absolute; /* Set absolute positioning */
+    bottom: 0; /* Position it at the bottom */
+    left: 10%; /* Align it with the left edge of the link */
+    width: 0%; /* Initially, the width is 0% */
+    height: 2px; /* Set the height of the underline */
+   background-image: linear-gradient(to right, #1b009f, #131d93, #1b2a84, #273273, #323961, #353b57, #393d4d, #3d3e42, #3c3c3f, #3a3a3c, #39393a, #373737); /* Color of the underline */
+    transition: width 0.5s ease; /* Add a transition for width */
+}
+
+.menu a:hover {
+ color:rgb(255, 255, 255);
+	
+}
+
+/* with gratitude to http://lea.verou.me/2012/02/simpler-css-typing-animation-with-the-ch-unit/*/
+@keyframes letters {
+  from {
+    left: 0;
+  }
+  to {
+    left: 50ch;
+  }
+}
+@keyframes lines {
+  from {
+    top: 0;
+  }
+  to {
+    top: 100%;
+  }
+}
+@keyframes cursor-type {
+  50% {
+    border-color: #000;
+  }
+}
+@keyframes cursor-wait {
+  0% {
+    box-shadow: inset 2px 0 0 0 rgba(0, 0, 0, 0);
+  }
+  1% {
+    box-shadow: inset 2px 0 0 0 black;
+  }
+  40% {
+    box-shadow: inset 2px 0 0 0 black;
+  }
+}
+.test {
+  display: none;
+  animation-name: cursor-wait;
+  animation-duration: 0.8s;
+  animation-timing-function: ease;
+  animation-iteration-count: 2;
+  animation-fill-mode: backward;
+  animation-delay: 0s;
+  padding-left: 10px;
+}
+
+.type {
+  position: relative;
+  font-family: Consolas, Monaco, monospace;
+  width: 50ch;
+  line-height: 1.2;
+  word-break: break-all;
+  overflow: hidden;
+}
+@supports (width: 1ch) {
+  .type:before, .type:after {
+    box-sizing: border-box;
+    content: "";
+    position: absolute;
+    z-index: 1;
+    display: block;
+    height: 1.2em;
+    width: 100%;
+    background-color: #fff;
+  }
+  .type:before {
+    border-left: 2px solid transparent;
+    top: 100%;
+    animation-name: letters, lines, cursor-type, cursor-wait;
+    animation-fill-mode: both, both, both, backwards;
+  }
+  .type:after {
+    content: "";
+    height: 100%;
+    top: 100%;
+    left: 0;
+    margin-top: 1.2em;
+  }
+}
+
+.type:before {
+  animation-duration: 1.4285714286s, 1.4285714286s, 0.0285714286s, 0.8s;
+  animation-timing-function: steps(50, end), steps(1, end), step-end, ease-out;
+  animation-iteration-count: 1, 1, 35, 2;
+  animation-delay: 1.6s, 1.6s, 1.6s, 0s;
+}
+.type:after {
+  animation: lines 1.4285714286s steps(1, end) 1;
+  animation-fill-mode: both;
+  animation-delay: 1.6s;
+}
+
+.type + .type:before {
+  animation-duration: 1.4285714286s, 5.7142857143s, 0.0285714286s, 0.8s;
+  animation-timing-function: steps(50, end), steps(4, end), step-end, ease-out;
+  animation-iteration-count: 4, 1, 181, 2;
+  animation-delay: 4.2s, 4.2s, 4.2s, 2.6s;
+}
+.type + .type:after {
+  animation: lines 5.7142857143s steps(4, end) 1;
+  animation-fill-mode: both;
+  animation-delay: 4.2s;
+}
+
+.type + .type + .type:before {
+  animation-duration: 1.4285714286s, 4.2857142857s, 0.0285714286s, 0.8s;
+  animation-timing-function: steps(50, end), steps(3, end), step-end, ease-out;
+  animation-iteration-count: 3, 1, 120, 2;
+  animation-delay: 10.9714285714s, 10.9714285714s, 10.9714285714s, 9.3714285714s;
+}
+.type + .type + .type:after {
+  animation: lines 4.2857142857s steps(3, end) 1;
+  animation-fill-mode: both;
+  animation-delay: 10.9714285714s;
+}
+
+.type + .type + .type + .type:before {
+  animation-duration: 1.4285714286s, 7.1428571429s, 0.0285714286s, 0.8s;
+  animation-timing-function: steps(50, end), steps(5, end), step-end, ease-out;
+  animation-iteration-count: 5, 1, 215, 2;
+  animation-delay: 16s, 16s, 16s, 14.4s;
+}
+.type + .type + .type + .type:after {
+  animation: lines 7.1428571429s steps(5, end) 1;
+  animation-fill-mode: both;
+  animation-delay: 16s;
+}
+

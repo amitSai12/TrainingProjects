@@ -1,0 +1,46 @@
+/* Style the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the table header row */
+th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+    border-bottom: 2px solid #ddd;
+}
+
+/* Style the table data rows */
+td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Style alternate rows with a different background color */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Style the checkbox inputs */
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+}
+
+/* Style the "NA" cells */
+td:empty::before {
+    content: "NA";
+    color: #999;
+}
+
+/* Add hover effect on rows */
+tr:hover {
+    background-color: #e5e5e5;
+}

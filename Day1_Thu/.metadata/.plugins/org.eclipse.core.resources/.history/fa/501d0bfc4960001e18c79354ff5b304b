@@ -1,0 +1,30 @@
+<%@page import="com.java.library.LibraryDAOImpl"%>
+<%@page import="com.java.library.LibraryDAO"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<jsp:include page="Menu.jsp"/> <Br/><br/>
+<jsp:useBean id="book" class="com.java.library.Books" scope="session"/>
+<jsp:setProperty property="*" name="book"/>
+
+<%	
+String user = (String)session.getAttribute("user");
+String[] issuedBookIds = request.getParameterValues("check1"); 
+LibraryDAO dao = new LibraryDAOImpl();
+//out.println(request.getParameter("Id"));
+
+    for (String id : issuedBookIds) {
+    	int bid = Integer.parseInt(id);
+    	out.println(dao.updateBooks(bid, user));
+    }	
+    
+%>
+</body>
+</html>
