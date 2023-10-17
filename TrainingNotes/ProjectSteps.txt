@@ -1,0 +1,43 @@
+~ Create EJB project
+
+~ SourceFolder -> resources -> dbProperties
+
+~ EJBSessioBean -> RemoteBean
+
+~ Employ -> EmployDAO -> EmployDAOImpl
+
+~ EJB implementation starts from RemoteFile -} BusinessLogic/Ejb/Jsf
+
+~ Interface -> EmployJdbcBeanRemote
+
+~ After adding the method signature in the interface -} EmployDAO
+
+~ EmployJdbcBean implements EmployJdbcBeanRemote -> 
+
+	` @Stateless -> @Remote(EmployJdbcBeanRemote.class)
+
+	` Call the method in EmployJdbcBean which is created in EmployDAOImpl
+
+~ meta.inf -> here the required dependecy will be updated in EJB
+_________________________________________________________________________________________
+
+Afte this client w.r.t JSF 
+--------------------------
+
+~ Create Maven Project -> Build Path -> Add the dependencies (pom.xml)
+
+~ web.xml and faces.config
+
+
+
+
+
+
+
+
+
+
+
+
+
+

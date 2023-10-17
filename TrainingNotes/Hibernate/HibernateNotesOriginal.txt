@@ -1,0 +1,146 @@
+Hibernate Steps : 
+____________________
+
+
+Hibernate used to implement data-based oriented applications. It is a ORM tool, which maps the java classes to backend database tables. 
+
+Steps to Create Hibernate Application : 
+
+Create a Project and add the relevant dependencies
+
+1) Create hibernate.cfg.xml file for loading configuration details, as it contains some mandetory properties and some optional properties. 
+
+    -> dialect :  Dialect is a class that acts as a bridge between Java JDBC types and SQL types, which contains the mapping between java language data type and database datatype. Dialect allows Hibernate to generate SQL optimized for a particular relational database
+syntax for dialect : 
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+Its predefined as changes according to db we are using. 
+
+ <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">Amitsai@123</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/infinite_august23</property>
+        <property name="hibernate.connection.username">root</property>
+
+Now, optional properties
+
+hibernate.connection.pool_size
+
+Limits the number of connections waiting in the Hibernate database connection pool.
+
+<property name="show_sql">true</property>
+
+Hibernate has build-in a function to enable the logging of all the generated SQL statements to the console. You can enable it by add a “show_sql” property in the Hibernate configuration file
+
+2) Mapping 
+
+    Map the POJO class to hbm.xml Example if you have Agent.java file Agent.hbm.xml file to be generated. 
+
+keys to remember : Please specify naming conventsions same as database fields, after generating if you need make proper modifications. 
+
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated 04-Oct-2023, 9:35:50 am by Hibernate Tools 3.6.2.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
+    <class dynamic-insert="false" dynamic-update="false" mutable="true" name="com.java.jsf.Employ" optimistic-lock="version" polymorphism="implicit" select-before-update="false" table="EMPLOY">
+        <id name="empno" type="int">
+            <column name="EMPNO"/>
+            <generator class="assigned"/>
+        </id>
+        <property generated="never" lazy="false" name="gender" optimistic-lock="true" unique="false">
+            <column name="GENDER"/>
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.java.jsf.Gender</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+        <property generated="never" lazy="false" name="basic" optimistic-lock="true" type="double" unique="false">
+            <column name="BASIC"/>
+        </property>
+    </class>
+</hibernate-mapping>
+
+What is <id> tag and what are the options in id tag available ???
+
+The <id> element maps the unique ID attribute in class to the primary key of the database table. The name attribute of the id element refers to the property in the class and the column attribute refers to the column in the database table. The type attribute holds the hibernate mapping type, this mapping types will convert from Java to SQL data type.
+<id name="empno" type="int">
+            <column name="EMPNO"/>
+            <generator class="assigned"/>
+        </id>
+
+ <generator class="assigned"/>  : Give as manually
+ <generator class="sequence"/> : Generates automatically
+Types of Generator Classes
+Hibernate provides many predefined generator classes. Some of the important predefined generator classes in hibernate are:
+
+assigned
+foreign
+hilo
+identity
+increment
+native
+sequence
+
+1. assigned generator
+
+The assigned generator is the default generator. By default hibernate consider assigned as a generator and assigned is a shortcut name given for the Assigned class. This class returns the same id set by us to the hibernate which in turn store an object with that id in the database.
+
+2. foreign generator
+
+foreign is a  shortcut name given for the ForeignGenerator class. The ForeignGenerator is only suitable for one-one relationships. It returns the id of the parent object as the id for the child object.
+
+5. increment generator
+
+An increment is a shortcut name given for the IncrementGenerator class. The IncrementGenerator class reads the max value of the existing ID in the database table and then increments it by one and returns the ID value to hibernate.
+
+7. sequence generator
+
+sequence is a shortcut name given for the SequenceGenerator class. It reads the next value of a database sequence and then returns that value as id to the hibernate.
+
+
+3) Step 3
+
+How to connect to Database and Retrieve Data
+
+1) Configuration : This interface allows you to load configuration information from hibernate.cfg.xml file
+
+Configuration cfg = new AnnotationConfiguration().configure().buildSessionFactory() 
+
+This statement used to load second level cache information and establish connection from database. This statement recognizes hibernate.cfg.xml file automatically from resources
+
+2) SessionFactory : The SessionFactory is a factory of session and client of ConnectionProvider. It holds second level cache (optional) of data. The org.hibernate.SessionFactory interface provides factory method to get the object of Session.
+
+But, We cannot make multiple SessionFactory objects, so we are dealing with Single-Ton Design pattern. as
+
+static SessionFactory sessionFactory;
+	public static SessionFactory getIntance() {
+		if (sessionFactory==null) {
+			sessionFactory= new AnnotationConfiguration().configure().buildSessionFactory();
+		}
+		return sessionFactory;
+	}
+
+Here, it checks whether sessionFactory object already exists, it maps to the particular object, only first time the object will be created. 
+
+Single-Ton design pattern says only one single instance to be created for entire project. 
+
+With SessionFactory, we are completely connected to database.  Now, we need to deal with table.
+
+
+3) Session 
+
+The Session interface is the main tool used to communicate with Hibernate. It provides an API enabling us to create, read, update, and delete persistent objects. The session has a simple lifecycle. We open it, perform some operations, and then close it.
+
+You can create a session as
+
+Session session = sessionFactory.openSession();
+
+// do relevant operations
+
+session.close();
+
+A Session is used to get a physical connection with a database. The Session object is lightweight and designed to be instantiated each time an interaction is needed with the database. Persistent objects are saved and retrieved through a Session object.
+
+Whenver you need to interact with table, open the session and after the operation you need to close the session, else it leads to isolation issues. 
+
+Example : 
+
+In same method, we need to do query and insert operation, then first after query please close the session object and open new session again, else it leads to isolation.

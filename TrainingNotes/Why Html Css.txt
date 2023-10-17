@@ -1,0 +1,18 @@
+* Creating web applications in 2 ways :
+
+	(i) Scripting languages 
+	(ii) Programming Languages
+
+* Scripting Languages :
+	Interprted during runtime, hence takes lot of time to execute.
+
+* Programming Languages :
+	Compiled first during runtime, hence takes less time to execute.
+
+
+* In web applications we can implement :-
+
+	(i) Client-Side :
+		- Enable to access the app from same client 
+		- Network traffic is high
+		- A bit slower

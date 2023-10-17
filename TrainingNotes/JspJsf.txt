@@ -1,0 +1,126 @@
+JSF (JAVA Server Pages)
+------------------------
+
+- JSF is an UI/Java frameWork for building web applications
+
+- Components : 
+	> This component-based model is beneficial in handling user-actions.
+
+	> Classes containing : 			
+
+attribute
+
+methods 
+		 
+events(onFocus):
+
+	a) ActionEvent
+
+
+e.g. Employ, EmployDAOImpl 
+		
+
+- Life Cycle of JSF -
+----------------------
+
+1) Restore view
+
+	> Inital request : user uses the page for first time
+
+	> Postback : submit after filling the credentials (it will load the values)
+
+2) Apply request values; process events
+	
+	> The control values (text, dropDown, checkbox) in UI is recognised and needs to be assigned in the 
+		managed bean.
+
+3) Process validations; process events
+
+	> Validations applied to process the events 
+
+4) Update model values; process events
+
+	> The model values needs to be updated
+
+5) Invoke the application
+
+6) Rendering (Execute or run)
+
+
+JSP:JSF :- <f:view> (facelets:view)
+
+
+
+- Faces Context - 
+-----------------
+
+- It is an abstract class (class which can be implemented but can't be instantiated) that represents all the      contextual information.
+
+- javax.faces.context.FacesContext
+
+- It can be called by ** getFacesContext method of FacesContextFactory **
+
+- Helps in displaying the relevant message
+
+	>FacesContext.responseComplete() : to control the requests 
+
+
+
+- faces-config.xml file -
+--------------------------
+
+- The file lists the 
+	
+	> bean resources
+	> validators
+	> navigation (class_name.jsp?faces-redirect=true)
+
+
+- Managed Bean -
+----------------
+
+- The managedBean element defines the managedBeans that are dynamically instantiated 
+
+- We cannot make interface(it will just show the contractual methods) or enums (valueType) form managedBean,     only normal classes can only have managedBean.
+
+- Mandatory properties : 
+	
+	> beanName
+	> class
+	> scope (in which to store the bean instance) 
+
+
+_______________________________________________________________________________________________________________
+PROJECT
+-------
+
+HealthCare
+
+InsuranceSystem
+
+	- Installment
+	- Alert Mail for breaking the policy
+	- Monthly, quarterly or yearly alert
+
+Assignment
+----------
+
+- Customer Table
+
+	- Wallet amount
+	- Wallet Source 
+
+*Wallet info to be loaded to the customer table automatically
+
+- Wallet Table
+
+- Restauarant Table
+
+- Menu Table
+	- Speciality : e.g. north_indian, chinese
+
+1) Login 
+2) Restaurant Details 
+3) Menu Items 
+4) Order
+	- OrderPending

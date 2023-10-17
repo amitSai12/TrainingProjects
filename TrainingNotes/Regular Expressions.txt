@@ -1,0 +1,21 @@
+- REGULAR EXPRESSIONS -
+------------------------
+
+- util.regex.Pattern : 
+
+- matches() : 
+
+- Pattern.matches (".m.t","amit") --> o/p : true  
+		  (".s.","sai") --> o/p : false
+	
+	> matches the value with the pattern
+	> checks if the char is present or not (checking for 'm' at 2nd place and 't' at 4th place)
+
+- Pattern.matches ("[aeiou]","a") --> true
+
+	> checks if the char 'a' is present in the string or not 
+
+- Pattern.matches ("[^aeiou]","s") --> true
+		  ("[^aeiou]","a") --> false
+
+	> checks if the char 's' is not present in the string (if_not_present : true; else : false)x

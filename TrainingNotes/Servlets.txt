@@ -1,0 +1,44 @@
+SERVLETS
+--------
+
+- Servlets runs on web server and application server
+
+- destroy() is called at the end of servlet life cycle
+
+- How to get the parameter in servlet ?
+
+	> request.getParameter(parameter_name);
+
+- How to get the server port ?
+	
+	> request.getServer(port);
+
+- How to get http session object values in servlet ?
+	
+	> session.getAttribute(attribute_name);
+
+- How to set page type to html ?
+
+	> response.getContent();
+
+- Which methods used to bind the object to session ?
+
+	> session.getAttribute();
+	  session.setAttribute();
+
+- Servlet : interface 
+- SevletContext : interface
+- GenericServlet : class
+- HttpServlet : class
+
+- Which method shows the client what server is recieving ?
+
+	> doget();
+
+- How constructor invoked in servlet ?
+
+	> init();
+
+ 
+
+

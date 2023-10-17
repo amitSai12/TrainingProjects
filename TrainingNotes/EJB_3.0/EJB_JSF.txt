@@ -1,0 +1,23 @@
+- Remote interfaces to be made 
+
+- After writing the code we have to deploy it
+
+- copy the interface
+ - JNDI properties
+
+- private static Context createInitialContext() throws Naming Exception
+
+- Context.lookup(); --> ctx.lookup();
+
+
+java:global/EjbCalc/Calculation!com.java.ejb.CalculationRemote
+	java:app/EjbCalc/Calculation!com.java.ejb.CalculationRemote
+	java:module/Calculation!com.java.ejb.CalculationRemote
+	java:jboss/exported/EjbCalc/Calculation!com.java.ejb.CalculationRemote
+	java:global/EjbCalc/Calculation
+	java:app/EjbCalc/Calculation
+	java:module/Calculation
+
+JNDI Example
+
+- We have to make the JNDI properties of our own

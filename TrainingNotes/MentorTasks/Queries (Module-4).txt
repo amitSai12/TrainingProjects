@@ -1,0 +1,37 @@
+-- MODULE 4
+
+-- 1) What is required to join two tables?
+
+-- Ans: To check the column name if they have the common values and datatypes
+
+-- 2) What is meant by self-join?
+
+-- Ans: Self join 
+
+-- 3) How do you qualify a column that is existing in two or more tables that are being joined?
+
+--4) What is table alias? Is it stored anywhere?
+
+--5)What happens when you join two tables without any condition?
+
+
+-- 6) Display rollno, student name, pay date and amount paid.
+
+-- 7) Display rollno , student name, batch code ,  stdate of batch  and faculty code.
+
+
+-- 8) Display rollno , student name, course name  ,  stdate  of batch  and faculty code.
+
+
+-- 9) Display rollno , student name, course name , faculty code and enddate of all batches that were completed.
+
+
+-- 10) Display students who have got more number of characters in name than the student with roll number 10.
+
+-- 11) Display rollno, student name, email , pay date and amount paid.
+
+-- 12) In previous query include the details of student who haven’t paid anything so far.
+
+
+-- 13) Display the details of students who have paid nothing so far.
+    

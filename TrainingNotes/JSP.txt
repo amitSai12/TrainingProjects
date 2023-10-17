@@ -1,0 +1,16 @@
+Drawbacks in Servlets
+----------------------
+
+- Html - Static Code
+- Servlets - Dynamic Code
+
+JSP (Java Server Pages)
+------------------------
+
+a) The simultaneous continutation of both static and dynamic content on the same page that improves the productivity of the particular application.
+
+b) A JSP page after compilation generates a Servlet
+
+c) <% %> - Scripted tag
+
+<p> Welcome to JSP Programming (Static Content) </p>

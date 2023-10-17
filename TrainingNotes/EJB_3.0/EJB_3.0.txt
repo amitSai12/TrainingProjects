@@ -1,0 +1,37 @@
+EJB - Enterprise Java Beans (Vesion 3.0)
+---------------------------------
+
+> Tomcat - WebServer
+> We use EJB for -- application server --
+> http : is a stateless protocol
+
+> What is the diff between web server and application server ?
+-----------------
+Web Server :-
+Allows to deploy applications directly into the server
+Application Server:-
+Allows to deploy application and business components also
+
+> Types of Beans 
+-----------------
+
+Bean (reusable component that contains the actual business components)
+
+> Three types of beans :
+
+1. Session Bean
+	a) StateLess Bean : used to perform independent operations, history is not 			    captured only the business components is only fetched
+
+		@Remote annotation
+		- public interface LibrarySessionRemoteMethod
+
+		@Stateless annotation
+		- Life Cycle : 
+			Doesn't exist state --> Ready State
+		
+	b) StateFull Bean : entire history can be captured 
+
+2. Entity Bean
+3. Message Driven Bean
+	            
+

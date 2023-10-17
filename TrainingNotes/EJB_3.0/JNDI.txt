@@ -1,0 +1,33 @@
+JNDI Java Naming Directory Interface
+-------------------------------------
+
+- It's like giving your application the right map and directions to find what it needs.
+__________________________________________________________________________________
+
+--------------------------------------------------------------------
+java.naming.factory.intial=org.jnp.interfaces.NamingContextFactory
+---------------------------------------------------------------------
+
+> specifies the initial context factory class
+
+//  it tells Java how to start looking for named objects //
+
+___________________________________________________________________________________
+
+---------------------------------------
+java.naming.factory.url.pkgs=org.jboss
+---------------------------------------
+
+> defines the package(s) where Java should look for URL context factories
+
+// it tells Java to search for context factories provided by JBoss and JNP (Java Naming and Directory Interface for Java EE) libraries //
+
+___________________________________________________________________________________
+
+----------------------------------------
+java.naming.provider.url=localhost:1099 
+----------------------------------------
+
+> specifies the URL of the naming or directory service you want to connect to
+
+// localhost part means the service is running on your local machine, and 1099 is typically the default port used by JBoss for JNDI lookups //

@@ -1,0 +1,5 @@
+<managed-bean>
+	<managed-bean-name>hello</managed-bean-name>
+ 	<managed-bean-class>com.java.jsf.HelloBean</managed-bean-class>
+   	<managed-bean-scope>request</managed-bean-scope>
+</managed-bean>

@@ -1,0 +1,81 @@
+3 types of application architecture :
+
+1. Single-tier Architecture
+2. Two-tier Architecture
+
+ Client - based
+	|-------------------------------------|        Server - based
+        |                 |-------------------|---------------| 
+	|---UserServices--|-BusinessServices--|--DataServies--|
+	|                 |-------------------|---------------|
+	|-------------------------------------|
+
+3. Three-tier Architecture
+
+
+Multi-Programming : 
+
+In multiprogramming system, one program will run the server and while the program is running, multiple clietns could access the server.
+
+RMI : Remote Method Invocation
+------------------------------
+
+- RMI app have two components :
+	
+	1. RMI Server
+	2. RMI Client
+
+- RMI architecture contains 3 layers :
+
+1. Stub/Skeleton Layer
+
+	- Stub : client-side proxy
+	- Skeleton : sever-side proxy
+
+Marshalling : a process of formatting stub data into network objects.
+
+2. Remote Reference Layer
+
+- Naming class : it provides the method to convert data to url objects 
+
+- rebind()
+
+- unbind()
+
+- lookup()
+
+- list()
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Remote : preDefined Interface which allows to implement remote methods (these methods can be called by 'n' no.of clients)
+
+extends Remote : Remote clients can take the access
+
+UnicastRemoteObject : is a class that allows for stub/skeleton at runtime (so that the client when access the program 			will hit the class)
+
+- Naming.rebind() : if you want to bind the server and localHost 
+
+- Naming.lookup() : it will just run the localHost
+
+TCPDirectSocketFactory Error : When the serverInstance is not found
+
+	
+		
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
